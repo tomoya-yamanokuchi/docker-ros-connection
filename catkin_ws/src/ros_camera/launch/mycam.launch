@@ -1,0 +1,5 @@
+<launch>
+	<group ns="camera">
+		<node name="image_raw_node" pkg="ros_camera" type="camera_node.py" output="screen"/>
+	</group>
+</launch>

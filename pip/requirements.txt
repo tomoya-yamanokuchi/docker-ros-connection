@@ -1,0 +1,13 @@
+###### Requirements without Version Specifiers ######
+flake8
+black
+numpy
+matplotlib
+opencv-python
+pandas
+
+natsort
+selenium
+ipdb
+
+###### Requirements with Version Specifiers ######
