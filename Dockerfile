@@ -1,4 +1,3 @@
-# FROM nvidia/cudagl:11.4.0-base-ubuntu20.04
 FROM osrf/ros:noetic-desktop-full
 
 # Install packages without prompting the user to answer any questions
@@ -88,6 +87,8 @@ RUN echo "source /home/tomoya-y/catkin_ws/devel/setup.bash" >> /root/.bashrc
 RUN echo "export ROS_HOSTNAME=localhost" >> /root/.bashrc
 RUN echo "export ROS_IP=localhost" >> /root/.bashrc
 RUN echo "alias cm='cd /home/tomoya-y/catkin_ws && catkin_make'" >> /root/.bashrc
+RUN echo "alias roscon='roslaunch ~/catkin_ws/src/image_viewers.launch'" >> /root/.bashrc
+RUN echo "alias devices='v4l2-ctl --list-devices'" >> /root/.bashrc
 
 
 #####################################################

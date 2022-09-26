@@ -16,5 +16,5 @@ docker run --rm -it --gpus all --privileged --net=host --ipc=host \
 -v /dev/snd:/dev/snd -e AUDIODEV="hw:Device, 0" \
 -v /home/$USER/workspace:/home/$USER/workspace \
 -v $PWD/catkin_ws:/home/$USER/catkin_ws \
--v /hdd_mount/real2sim_ws:/home/$USER/workspace/real2sim_ws \
+-v /hdd_mount/ROBEL_DClaw_hands_on:/home/$USER/workspace/ROBEL_DClaw_hands_on \
 docker_ros
