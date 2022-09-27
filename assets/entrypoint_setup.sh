@@ -87,6 +87,7 @@ setup_specific_user_setting () {
     echo "source /home/$USER/catkin_ws/devel/setup.bash" >> /root/.bashrc
     sudo mkdir /home/$USER/.ros/
     sudo chmod -R 777 /home/$USER/.ros/
+    sudo chmod 666 /dev/ttyACM0
 
     export USER=$USER
 }
