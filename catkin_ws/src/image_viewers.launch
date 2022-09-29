@@ -6,7 +6,7 @@
   </group>
 
   <node name="view_raw"         pkg="image_view" type="image_view" args="image:=/camera/image_raw"/>
-  <node name="view_observation" pkg="image_view" type="image_view" args="image:=/camera/observation"/>
+  <node name="view_observation" pkg="image_view" type="image_view" args="image:=/visualize/observation"/>
 
   <!-- <node name="view_drkvae_C2"                  pkg="image_view" type="image_view" args="image:=/stream/C2"/>
   <node name="view_drkvae_R2"                  pkg="image_view" type="image_view" args="image:=/stream/R2"/>

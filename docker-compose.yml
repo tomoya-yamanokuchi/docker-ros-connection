@@ -1,0 +1,44 @@
+version: '3'
+services:
+  roscore:
+    image: docker_ros
+    # user: "${DOCKER_USER_ID}:${DOCKER_USER_GROUP_ID}"
+    command: terminator
+    # ipc: host
+    # networks: host
+    tty: true
+    environment:
+      - DOCKER_USER_NAME=${DOCKER_USER_NAME}
+      - DOCKER_USER_ID=${DOCKER_USER_ID}
+      - DOCKER_USER_GROUP_NAME=${DOCKER_USER_GROUP_NAME}
+      - DOCKER_USER_GROUP_ID=${DOCKER_USER_GROUP_ID}
+      - XAUTHORITY=/home/$USER/.Xauthority
+      - DISPLAY=${DISPLAY}
+      - AUDIODEV="hw:Device, 0"
+
+  ros_connection:
+    image: docker_ros
+    # user: "${DOCKER_USER_ID}:${DOCKER_USER_GROUP_ID}"
+    command: terminator
+    # ipc: host
+    # networks: host
+    tty: true
+    environment:
+      - DOCKER_USER_NAME=${DOCKER_USER_NAME}
+      - DOCKER_USER_ID=${DOCKER_USER_ID}
+      - DOCKER_USER_GROUP_NAME=${DOCKER_USER_GROUP_NAME}
+      - DOCKER_USER_GROUP_ID=${DOCKER_USER_GROUP_ID}
+      - XAUTHORITY=/home/$USER/.Xauthority
+      - DISPLAY=${DISPLAY}
+      - AUDIODEV="hw:Device, 0"
+    # volumes:
+    #   - $HOME/.Xauthority:/home/$USER/.Xauthority
+    #   - /tmp/.X11-unix:/tmp/.X11-unix
+    #   - /dev/snd:/dev/snd
+    #   - $PWD/catkin_ws:/home/$USER/catkin_ws
+
+volumes:
+  $HOME/.Xauthority:/home/$USER/.Xauthority
+  /tmp/.X11-unix:/tmp/.X11-unix
+  /dev/snd:/dev/snd
+  $PWD/catkin_ws:/home/$USER/catkin_ws
