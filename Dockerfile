@@ -87,8 +87,12 @@ RUN echo "source /home/tomoya-y/catkin_ws/devel/setup.bash" >> /root/.bashrc
 RUN echo "export ROS_HOSTNAME=localhost" >> /root/.bashrc
 RUN echo "export ROS_IP=localhost" >> /root/.bashrc
 RUN echo "alias cm='cd /home/tomoya-y/catkin_ws && catkin_make'" >> /root/.bashrc
-RUN echo "alias roscon='roslaunch ~/catkin_ws/src/image_viewers.launch'" >> /root/.bashrc
 RUN echo "alias devices='v4l2-ctl --list-devices'" >> /root/.bashrc
+
+RUN echo "alias roscon=' \
+		sudo chmod 666 /dev/ttyACM0 && \
+		sudo chmod 666 /dev/video0 && \
+		roslaunch ~/catkin_ws/src/image_viewers.launch'" >> /root/.bashrc
 
 
 #####################################################
@@ -109,4 +113,5 @@ COPY assets/entrypoint_setup.sh /
 ENTRYPOINT ["/entrypoint_setup.sh"] /
 
 # Run terminator
-CMD ["terminator"]
+# CMD ["terminator"]
+CMD ["/bin/bash"]
