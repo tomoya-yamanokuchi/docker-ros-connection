@@ -5,7 +5,8 @@
     <node name="image_raw_node" pkg="ros_camera" type="camera_node.py" output="screen"/>
   </group>
 
-  <node name="view_raw"         pkg="image_view" type="image_view" args="image:=/camera/image_raw"/>
+  <node name="view_origin"      pkg="image_view" type="image_view" args="image:=/camera/image_origin"/>
+  <node name="view_resize"      pkg="image_view" type="image_view" args="image:=/camera/image_resize"/>
   <node name="view_observation" pkg="image_view" type="image_view" args="image:=/visualize/observation"/>
 
   <!-- <node name="view_drkvae_C2"                  pkg="image_view" type="image_view" args="image:=/stream/C2"/>

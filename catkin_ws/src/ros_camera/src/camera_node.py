@@ -56,37 +56,22 @@ class CameraNode:
 
         # ros setting
         rospy.init_node("image_raw_node", disable_signals=True)
-        pub_cam = rospy.Publisher("image_raw", Image, queue_size=1)
-        r       = rospy.Rate(30)
-        bridge  = CvBridge()
-        img     = Image()
+        pub_cam_origin = rospy.Publisher("image_origin", Image, queue_size=1)
+        pub_cam_resize = rospy.Publisher("image_resize", Image, queue_size=1)
 
-        # run publish loop
+        r = rospy.Rate(30)
         while not rospy.is_shutdown():
             ret, frame      = cap.read()
             # print("cap.red() shape = ", frame.shape)
-            undistort_image = frame
-            undistort_image = cv2.undistort(frame, camera_mat, dist_coef)
+            undistort_image        = frame
+            undistort_image        = cv2.undistort(frame, camera_mat, dist_coef)
+            img_origin, img_resize = self.resize(undistort_image, width_height=(64, 64))
 
-            # undistort_image = cv2.medianBlur(undistort_image, ksize=13)
-            # undistort_image = self.convert_specific_color(undistort_image)
-            # undistort_image = 255 - undistort_image
+            # print("img_origin shape = ", img_origin.shape)
+            # print("img_resize shape = ", img_resize.shape)
 
-            # resize
-            # frame           = self.resize(frame)
-            undistort_image = self.resize(undistort_image, width_height=(64, 64))
-            # undistort_image = self.resize(undistort_image)
-            # # add center line
-            # frame           = self.add_center_line(frame)
-            # undistort_image = self.add_center_line(undistort_image)
-
-            # print(cap.get(cv2.CAP_PROP_AUTO_EXPOSURE))
-
-            # undistort_image = np.concatenate([undistort_image, undistort_image], axis=1)
-
-            # pub_cam.publish(bridge.cv2_to_imgmsg(undistort_image, encoding="bgr8"))
-            pub_cam.publish(ros_numpy.msgify(Image, undistort_image, encoding='bgr8'))
-
+            pub_cam_origin.publish(ros_numpy.msgify(Image, img_origin, encoding='bgr8'))
+            pub_cam_resize.publish(ros_numpy.msgify(Image, img_resize, encoding='bgr8'))
 
             r.sleep()
 
@@ -106,15 +91,16 @@ class CameraNode:
 
 
     def resize(self, img, width_height=(128, 128)):
-        h  = img.shape[1]
-        w  = img.shape[0]
-        hc = int(h*0.5)
+        h          = img.shape[1]
+        w          = img.shape[0]
+        # hc         = int(h*0.5)
+        hc         = int(h*0.51) # 中心にバルブを持ってくるため
+        wc         = int(w*0.5)
+        img_origin = img[:, hc-wc:hc+wc]
 
-        wc = int(w*0.5)
-        img = img[:, hc-wc:hc+wc]
-
-        img = cv2.resize(img , width_height)
-        return img
+        img_origin = img_origin[30:, 30:] # 中心にバルブを持ってくるため
+        img_resize = cv2.resize(img_origin , width_height)
+        return img_origin, img_resize
 
 
     def add_center_line(self, img):
