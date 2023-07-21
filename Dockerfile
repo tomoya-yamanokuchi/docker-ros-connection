@@ -57,29 +57,31 @@ RUN apt-get update && \
 #####################################################
 RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
-RUN apt-get update && apt-get install -y \
-	libfcl* \
-	libglew-dev \
-	ros-noetic-desktop-full \
-	ros-noetic-joy \
-	ros-noetic-gazebo* \
-	ros-noetic-moveit* \
-	ros-noetic-image-view* \
-	ros-noetic-cv-camera* \
-	ros-noetic-joint* \
-	ros-noetic-graph* \
-	ros-noetic-ros-controller* \
-	ros-noetic-joy-teleop* \
-	ros-noetic-eigen* \
-	ros-noetic-rosbridge-server* \
-	ros-noetic-geometric* \
-	ros-noetic-object-recognition* \
-	ros-noetic-map-server* \
-	ros-noetic-warehouse-ros* \
-	ros-noetic-rosserial \
-	ros-noetic-ros-numpy \
-	ros-noetic-geodesy && \
-	apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update
+
+RUN apt-get install -y libfcl*
+RUN apt-get install -y libglew-dev
+RUN apt-get install -y ros-noetic-desktop-full
+RUN apt-get install -y ros-noetic-joy
+# RUN apt-get install -y ros-noetic-gazebo*
+# RUN apt-get install -y ros-noetic-moveit*
+RUN apt-get install -y ros-noetic-image-view*
+RUN apt-get install -y ros-noetic-cv-camera*
+RUN apt-get install -y ros-noetic-joint*
+RUN apt-get install -y ros-noetic-graph*
+RUN apt-get install -y ros-noetic-ros-controller*
+RUN apt-get install -y ros-noetic-joy-teleop*
+RUN apt-get install -y ros-noetic-eigen*
+RUN apt-get install -y ros-noetic-rosbridge-server*
+RUN apt-get install -y ros-noetic-geometric*
+RUN apt-get install -y ros-noetic-object-recognition*
+RUN apt-get install -y ros-noetic-map-server*
+RUN apt-get install -y ros-noetic-warehouse-ros*
+RUN apt-get install -y ros-noetic-rosserial
+RUN apt-get install -y ros-noetic-ros-numpy
+RUN apt-get install -y ros-noetic-geodesy
+RUN apt-get clean
+RUN rm -rf /var/lib/apt/lists/*
 
 RUN echo "export ROSLAUNCH_SSH_UNKNOWN=1" >> /root/.bashrc
 RUN echo "source /opt/ros/noetic/setup.bash" >> /root/.bashrc

@@ -13,9 +13,8 @@ docker run --rm -it --gpus all --privileged --net=host --ipc=host \
 -e DOCKER_USER_GROUP_NAME=$(id -gn) \
 -e DOCKER_USER_GROUP_ID=$(id -g) \
 -v $HOME/.Xauthority:/home/$(id -un)/.Xauthority -e XAUTHORITY=/home/$(id -un)/.Xauthority \
--v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY \
+-v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY \
 -v /dev/snd:/dev/snd -e AUDIODEV="hw:Device, 0" \
 -v /home/$USER/workspace:/home/$USER/workspace \
 -v $PWD/catkin_ws:/home/$USER/catkin_ws \
--v /hdd_mount/ROBEL_DClaw_hands_on:/home/$USER/workspace/ROBEL_DClaw_hands_on \
 docker_ros
