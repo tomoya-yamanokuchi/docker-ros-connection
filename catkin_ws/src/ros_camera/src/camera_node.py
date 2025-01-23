@@ -26,7 +26,7 @@ class CameraNode:
         # cmd.append('v4l2-ctl -d /dev/video' + video_id + ' -c hue=128')
         cmd.append('v4l2-ctl -d /dev/video' + video_id + ' -c white_balance_temperature_auto=0') # manual mode
         cmd.append('v4l2-ctl -d /dev/video' + video_id + ' -c gamma=100')
-        cmd.append('v4l2-ctl -d /dev/video' + video_id + ' -c gain=0')
+        cmd.append('v4l2-ctl -d /dev/video' + video_id + ' -c gain=0') # 使えなくなっている？（2025/01/22 by tomoya-y）
         cmd.append('v4l2-ctl -d /dev/video' + video_id + ' -c power_line_frequency=1')
         cmd.append('v4l2-ctl -d /dev/video' + video_id + ' -c white_balance_temperature=0')
         cmd.append('v4l2-ctl -d /dev/video' + video_id + ' -c sharpness=2')

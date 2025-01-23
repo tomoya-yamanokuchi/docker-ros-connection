@@ -92,8 +92,9 @@ RUN echo "alias cm='cd /home/tomoya-y/catkin_ws && catkin_make'" >> /root/.bashr
 RUN echo "alias devices='v4l2-ctl --list-devices'" >> /root/.bashrc
 
 RUN echo "alias roscon=' \
-		sudo chmod 666 /dev/ttyACM0 && \
-		sudo chmod 666 /dev/video0 && \
+		sudo chmod 777 /dev/ttyACM0 && \
+		sudo chmod 777 /dev/video0 && \
+		sudo chmod 777 /dev/video1 && \
 		roslaunch ~/catkin_ws/src/image_viewers.launch'" >> /root/.bashrc
 
 
